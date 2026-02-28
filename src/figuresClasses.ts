@@ -10,25 +10,21 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
-    if (a <= 0 || b <= 0 || c <= 0) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Sides must be positive numbers.');
     }
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
+    if (
+      this.a + this.b <= this.c ||
+      this.a + this.c <= this.b ||
+      this.b + this.c <= this.a
+    ) {
       throw new Error(
         'The sum of any two sides must be greater than the third side.',
       );
@@ -47,15 +43,11 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
-    this.color = color;
-    this.radius = radius;
-
-    if (radius <= 0) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    if (this.radius <= 0) {
       throw new Error('Radius must be a positive number.');
     }
   }
@@ -63,25 +55,19 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    return Math.round(area * 100) / 100; // округляє до сотих
+    return Math.floor(area * 100) / 100; // округляє до сотих
   }
 }
 
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
-    if (width <= 0 || height <= 0) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    if (this.width <= 0 || this.height <= 0) {
       throw new Error('Width and height must be positive numbers.');
     }
   }
